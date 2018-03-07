@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+</head>
+<body>
+<input type="text" id="input">
+<p id="p1"></p>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+
+    let obj = {};
+    let temp = {};
+    Object.defineProperty(obj, 'name', {
+        get() {
+            return temp['name'] || '';
+        },
+        set(val) {
+            temp['name'] = val;
+            input.value = val;
+            p1.innerHTML = val;
+        }
+    });
+
+    input.value = obj.name;
+    input.oninput = () => {
+        obj['name'] = input.value;
+        p1.innerHTML = obj['name'];
+    };
+
+</script>
+</body>
+</html>

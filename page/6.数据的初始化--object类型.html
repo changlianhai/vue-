@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+</head>
+<body>
+<div class="box">
+    {{a.school}}
+    {{a.address}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    // 初始化,  vue会循环data中的数据(数据劫持)，依次的增加getter/setter
+    let vm = new Vue({
+        el: '.box',
+        data: {
+            a: {   //1.
+                school: 1,
+            }
+        }
+    });
+
+    vm.a.name = '11'; // ==>>这样是不可以的
+
+
+    // ==>> 在使用变量的时候，先要进行初始化，否则新加的属性不会导致页面刷新，新加的没有setter/getter 函数，  也就是Object.defineProperty的缺点
+    // ==>> 2.0解决办法    vm.$set(对象，属性名， 属性值)， 在进行监听变量
+    vm.$set(vm.a, 'address', '河北省张家口市');
+
+    // ==>> 3.0如果增加的多了怎么办了， 替换原对象方法
+    vm.a = {school: '河北师大',address: '阳1原'};  // ==>>引用地址变了，观察者模式
+</script>
+</body>
+</html>

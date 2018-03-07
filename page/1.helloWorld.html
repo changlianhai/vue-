@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <!--  mut 语法，表达式， 三目运算符...-->
+    {{name === 'clh' ? 1: 0}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    // ==>> 引入vue后给你一个Vue的类，类似于引入jQuery,有个$/jQuery
+    let vm = new Vue({
+        el: '#app',  // ==>>选择元素使用document.querySelector();
+        data: {      // ==>> data里面的数据会被vm代理
+            name: 'clh',    // ==>> 可以通过vm.name获取到对应的内容
+        }
+    });
+
+    //==>>这个方法双向数据绑定的是原理  Object.defineProperty();
+
+
+    // ==>>查看类和原型上的方法
+    console.dir(m);
+    console.dir(Vue);
+    vm.__proto__ === Vue.prototype; // =>> true
+
+</script>
+</body>
+</html>

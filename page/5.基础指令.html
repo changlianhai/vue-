@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+</head>
+<body>
+<div id="app">
+    <!-- v-text 防止 {{}} 闪烁问题，但是可以用v-locak样式解决-->
+    <input type="text" v-model="msg" />
+    <div v-text="msg"></div>
+    <div v-text="msg" v-once=""></div>
+    <div v-html="p"></div>
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    /**
+     * v-text 防止 {{}} 闪烁问题，但是可以用v-cloak样式解决
+     *   v-text标记里面在放入内容，会替换掉， 解析不了HTML标记
+     *
+     *
+     * v-once 只渲染一次，也不会导致页面刷新
+     *
+     * v-html: 解析字符串里面的标记
+     */
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'vue-11',
+            p: `<div><p>p1</p></div>`
+        },
+    })
+</script>
+</body>
+</html>

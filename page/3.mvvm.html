@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue</title>
+    </head>
+    <body>
+    <div id="app">
+        <input type="text" v-model="msg" />
+        <p>{{msg}}</p>
+
+        <!-- 双向数据绑定 -->
+        <!--
+
+             1. input里面的值发生改变, view发生了改变， model立即跟着修改, vm.msg获取
+             2. vm.msg更改model数据， view马上更正修改，页面数据发生改变
+
+        -->
+
+
+    </div>
+    <script src="./../node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        // VUE双向数据绑定原理
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world',
+            }
+        });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+</head>
+<body>
+<div class="box">
+            {{arr}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    // 初始化,  vue会循环data中的数据(数据劫持)，依次的增加getter/setter (Object.defineProperty)
+    let vm = new Vue({
+        el: '.box',
+        data: {
+            arr: [1, 2,3,4,5,6,7,8,9,0],
+        }
+    });
+    // ==>>去改变数组中的某一项监控不到的，也不能使用改变数组长度的方法
+    //  错粗: vm.arr[0] = 22   vm.arr.length = 2;
+
+
+    // 1.数组的变异方法:  pop , push , shift, unshift, sort, reverse, splice
+    // 2.改变引用地址:
+    vm.arr = vm.arr.map(item => item*3);
+
+
+</script>
+</body>
+</html>

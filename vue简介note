@@ -1,0 +1,60 @@
+Angular
+
+
+React
+
+
+Vue
+
+
+jQuery
+
+
+1.Vue的俩个特点:
+  1) 相应的数据变化
+        当数据发生改变 --- 视图自动更新
+  2) 组合的视图组件
+        UI页面映射为组件树
+        划分组件可维护、可复用、可测试
+
+
+2.渐进式(渐进增强)
+ - vue全家桶  vue.js + vue-router + vuex + axios
+ - 通过组合 完成一个完整的框架
+
+
+ 3.
+    MVC (backbone.js)   单向
+     - model 数据
+     - view  视图
+     - controller 控制器 (中间层)
+
+
+    MVVM(angular, vue)  双向
+       - model 数据
+       - view  视图
+       - viewModel 视图模型 (中间层)
+
+
+    双向数据绑定， 表单 v-model
+    单向数据绑定，model -->>view进行页面展示 input textarea, checkbox radio select
+
+
+
+
+ 4.Vue的双向数据绑定原理:Object.defineProperty(obj, atr, settings);
+    NPM官网: https://www.npmjs.com/
+
+
+ 5.安装vue
+    cdn安装
+    npm安装 npm install vue -g
+
+
+
+    安装步骤:
+     1) 初始化项目配置参数: npm init  初始化会产生一个package.json的文件用来描述项目的依赖，项目名称不能喝安装的依赖名字重复了
+               dependencies参数， 是你安装的依赖模块
+
+     2) 安装vue: npm install vue   默认安装最新的版本 --->>  安装到本地
+        npm install 安装依赖，也就是安装dependencies里面的模块
