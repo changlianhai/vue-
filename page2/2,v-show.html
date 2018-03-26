@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="点击我" />
+    <template v-if="cut">
+        <label for="">注册</label>
+        <input type="text">
+    </template>
+
+    <template v-else>
+        <label for="">登录</label>
+        <input type="text">
+    </template>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: false,
+            cut:true
+        }
+    });
+</script>
+</body>
+</html>

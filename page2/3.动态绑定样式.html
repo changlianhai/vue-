@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <style>
+        .x1 { font-size: 50px; }
+        .y1 { color:red; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class='a' :class='[x, y]'>div1</div>  <!-- 数组绑定法 -->
+    <div class='a' :class='{x1:x,y1:y}'>div1</div>   <!-- 对象绑定法 -->
+
+    <button @click='aa'>btn</button>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+           x: 'x1',
+           y: 'y1',
+           num: 1,
+
+        },
+        methods: {
+            aa() {
+                if (this.num ===1) {
+                    this.x = false;
+                } else {
+                    this.num = 1;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

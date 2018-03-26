@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="info" > {{msg}}
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            info: '',
+            msg: '',
+        },
+        computed: {
+            // msg() {
+            //    setTimeout(() => {
+            //        if (this.info.length < 3) return '太短';
+            //        if (this.info.length > 6) return '太长';
+            //        return '';
+            //    }, 100)
+            // }
+        },
+        watch: {
+          info(newValue, oldValue) {
+             setTimeout(() => {
+                 if (this.info.length < 3) {
+                     this.msg = '太短';
+                     return;
+                 }
+                 if (this.info.length > 6)  {
+                     this.msg = '太长';
+                     return;
+                 }
+                 this.msg = '';
+             },1000)
+          }
+        }
+    });
+</script>
+</body>
+</html>

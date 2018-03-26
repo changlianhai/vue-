@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">w
+    1<input type="radio"  v-model="x" value="1">
+    2<input type="radio"  v-model="x" value="2">
+    3<input type="radio"  v-model="x" value="3">
+    {{x}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            x: ''
+        }
+    })
+</script>
+</body>
+</html>

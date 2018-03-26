@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <div>{{a()}}</div>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        beforeCreate() {
+
+        },
+        computed: {
+            name() {
+                return 100;
+            }
+        },
+
+        data: {
+            x: 1,
+            y: 2,
+        },
+        methods: {
+            a() {
+
+            }
+        },
+        created() {
+            console.log(this.__proto__ === Vue.prototype);
+        },
+        el: '#app',
+        template: '<div>{{x + y}}</div>',
+        beforeMount() {
+            alert('模板渲染前');
+        },
+        mounted(){
+            alert('模板渲染后');
+        },
+        beforeDestroy() {
+            alert('销毁前');
+        },
+        destroy() {
+            alert('销毁后');
+        }
+    });
+    vm.$destroy();
+</script>
+</body>
+</html>

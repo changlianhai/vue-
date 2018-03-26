@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    选择<input type="checkbox" />
+    <br />
+    哈密瓜<input type="checkbox" value="哈密瓜" v-model="b">
+    香蕉<input type="checkbox" value="香蕉" v-model="b">
+    草莓<input type="checkbox" value="草莓" v-model="b">
+    {{b}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            a: 1,
+            b: [],
+            
+        }
+    });
+</script>
+</body>
+</html>

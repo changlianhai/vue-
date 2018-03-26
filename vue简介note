@@ -53,8 +53,11 @@ jQuery
 
 
     安装步骤:
-     1) 初始化项目配置参数: npm init  初始化会产生一个package.json的文件用来描述项目的依赖，项目名称不能喝安装的依赖名字重复了
+     1) 初始化项目配置参数: [npm init]  初始化会产生一个package.json的文件用来描述项目的依赖，项目名称不能喝安装的依赖名字重复了
                dependencies参数， 是你安装的依赖模块
 
      2) 安装vue: npm install vue   默认安装最新的版本 --->>  安装到本地
-        npm install 安装依赖，也就是安装dependencies里面的模块
+        [npm install] 安装依赖，也就是安装dependencies里面的模块
+
+
+    Alt + F12 打开/关闭命令窗口

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * { margin:0;padding:0;list-style-type: none;text-decoration: none; }
+        .container { width:600px;margin: 20px auto; }
+        .container h1 { height:125px;line-height:55px;background-color: antiquewhite;color:#333;font-size: 16px;text-align: center; }
+        .container h1 input { display:block;margin:5px auto;border:none;width:90%;height:30px;border:1px solid #333; }
+        .tast_li > ul  li { padding: 0 0 0 5px;height:40px;border:1px solid #ccc;line-height: 40px; }
+        .tast_li > ul  li > div { float:left; width: 300px; }
+        .tast_li > ul  li a {line-height:30px;border-radius:6px;margin:5px 10px 0 0; cursor:pointer;padding:0 4px;height:30px;float:right;text-decoration: none;background-color: #f00;color:#fff; }
+        .cont li { cursor:pointer;padding:10px 0px; float:left;width:33%;text-align: left;height:35px;line-height: 35px;background-color: grey;color:#fff; }
+        .task_all { padding-left:10px; }
+        .del { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <h1>亲，还有{{num}}件事情没有完成
+                <input type="text" v-model="addTask" @keyup.enter="addTaskFn" placeholder="请输入要办的事情" class="task_all"/>
+        </h1>
+       
+       <div class="tast_li">
+           <ul>
+               <li v-for=" (item, index) in todoList" @dblclick="member">
+                   <div>
+                        <input type="checkbox" v-model="item.isSelected">
+                        <span v-bind:class="{del:item.isSelected}">{{item.title}}</span>
+                       <input type="text" v-model="item.title">
+                   </div>
+                   <a @click="removeItem($event, index)">删除</a>
+               </li>
+           </ul>
+       </div>
+       <div class="cont">
+           <ul>
+               <li><a>全部任务</a></li>
+               <li><a>已完成</a></li>
+               <li><a>未完成</a></li>
+           </ul>
+       </div>
+    </div>
+</div>
+    <script src="./../node_modules/vue/dist/vue.js"></script>
+    <script src="./../node_modules/axios/dist/axios.min.js"></script>
+    <script src="todo.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+    });
+
+
+    var x = 10;
+    var obj = {
+       x: 20,
+       say(){
+           console.log(this.x);
+       }
+    };
+    obj.say();
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        thead, td{ text-align: center;cursor: pointer; }
+        thead { background-color: gold;color: #fff; }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <div class="container">
+       <p>用户自定义购物车</p>
+
+        <div>
+            数量:<input type="number" v-model.number="userAddInfo.count" value="" min="1">
+            价格:<input type="number" v-model.number="userAddInfo.price" value ="" min="1">
+            <button @click="userAddInfoFn">添加</button>
+            <button @click="userAddReset">重置</button>
+
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>全选<input type="checkbox" v-model="checkAllFlag"></th>
+                <th>序号</th>
+                <th>id</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>价格</th>
+                <th>小计</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in userInfo">
+                    <td><input type="checkbox"  v-model="item.isSelected" ></td>
+                    <td>{{index}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.title}}<img src="" v-bind:src="item.imgSrc" /> </td>
+                    <td><input type="button"  value="+" @click="addCount($event, index)">{{item.count}}<input type="button" value="-" @click="removeCount($event, index)"></td>
+                    <td>{{item.price}}</td>
+                    <td>{{(item.count * item.price) | toFixed(2)}}</td>  <!--保留两位小数，不太好，用computed-->
+                    <td><button @click="removeItem($event, index)" title="删除"  class="btn btn-danger">删除</button></td>
+                </tr>
+             <tr>
+                 <td colspan="8" style="text-align: left;">
+                     总计: {{sum | toFixed(2)}}
+                 </td>
+             </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/axios/dist/axios.min.js"></script>
+<script>
+    // Promise ==>> https://zhuanlan.zhihu.com/p/34673704
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo: [],
+            selectFlag: false,
+            userAddInfo: {
+                count: '',
+                price: '',
+            },
+        },
+        // ==>>计算属性，优化重复计算， 也会挂在实例上，不能喝data与methods重名
+        computed: {
+            checkAllFlag: {
+                get() {  // ==>> get和set中的this仍然指向实例
+                    // ==>> 默认 v-model会获取checkAll的值， 所以会调用get方法
+                    return  this.userInfo.every(item => item.isSelected);
+                },
+                set(val) {
+                    this.userInfo.forEach(item => {
+                       item.isSelected  = val;
+                   })
+                }
+            },
+            // ==>> sum的结果会被缓存，如果依赖的数据没有发生改变就不会重新执行  ==>> 值会去对比  sum()不会
+            // ==>> 如果计算属性写成函数，默认调用的是get方法
+          /*  sum: {
+                get() {
+                    return this.userInfo.reduce((prev,next) => {
+                        if (!next.isSelected) return prev;
+                        return prev +  (next.price * next.count);
+                    }, 0);
+                }
+            },*/
+            sum() {
+                return this.userInfo.reduce((prev,next) => {
+                    if (!next.isSelected) return prev;
+                    return prev +  (next.price * next.count);
+                }, 0);
+            }
+        },
+        methods: {
+            userAddReset() {
+                this.userAddInfo.count = '';
+                this.userAddInfo.price = '';
+            },
+            userAddInfoFn() {
+              let obj = {};
+              obj.count = this.userAddInfo.count;
+              obj.price = this.userAddInfo.price;
+              obj.title = 'html';
+              obj.src =  "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg";
+              obj.id = (this.userInfo[this.userInfo.length-1].id)/1 + 1;
+              this.userInfo.push(obj);
+
+            },
+            // ==>>这种写法，里面的this是window对象
+            // removeItem: () => {
+            //
+            // }
+            removeItem(event, index) {
+                this.userInfo.splice(index, 1);
+            },
+            addCount(event, index) {
+                this.userInfo[index].count ++;
+            },
+            removeCount(event, index) {
+                if (this.userInfo[index].count === 0) {
+                    alert('产品数量不能小于0');
+                    return;
+                }
+                this.userInfo[index].count--;
+            },
+
+
+        },
+        created() {
+            axios.get('./../data/userInfo.json').then(result => {
+                this.userInfo = result.data;
+
+            });
+        },
+        filters: {
+            toFixed(value, n) {
+                return  '$' + value.toFixed(n);  // ==>>value是前面的值   value是获取到的值，n是函数的形参
+            }
+        }
+    });
+</script>
+</body>
+</html>

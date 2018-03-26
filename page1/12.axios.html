@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+  {{data[1].id}}
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/axios/dist/axios.min.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+           data: [],
+        },
+        created() {
+
+            // axios: https://www.kancloud.cn/yunye/axios/234845
+            console.log(this instanceof Vue) ; // ==>> true
+            axios.get('../data/b.json').then(result => {
+                console.log(result);
+                this.data = result.data;
+            });
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <p><input type="radio" v-model="radio" value="home">home</p>
+    <p><input type="radio" v-model="radio" value="list">list</p>
+   <!--  <compent :is="radio"></compent>-->  <!-- 不会进行缓存，消耗内存，切换重新刷新 -->
+    <!-- 一般用作缓存，为的是后面的路由准备，如果缓存了就不走钩子函数了 -->
+    <keep-alive>
+        <compent :is="radio"></compent>
+    </keep-alive>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let home = {
+      template: '<div>home</div>',
+
+    };
+    let list = {
+      template:`<div>list</div>`
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            radio: 'home',
+        },
+        components: {
+            home, list
+        },
+    })
+</script>
+</body>
+</html>

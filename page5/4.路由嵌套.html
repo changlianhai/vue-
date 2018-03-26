@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .main_nav {
+            padding: 0 20px;
+            width: 100%;
+            float: left;
+            background-color: #00a0e9;
+            color: #fff;
+            cursor: pointer;
+            overflow: hidden;
+
+        }
+
+        .main_nav > li {
+            float: left;
+            width: 200px;
+            list-style: none;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+        .router-link-active {
+            display: block;
+            background-color: gold;
+        }
+
+        .cont_nav {
+            float: left;
+            height: 100%;
+            width: 200px;
+            background-color: green;
+            color: #fff;
+        }
+
+        .sub_nav {
+            float: left;
+            background-color: palevioletred;
+            text-align: center;
+            width: 220px;
+            height: 620px;
+
+        }
+
+        .sub_nav li {
+            height: 35px;
+            padding: 10px 0;
+        }
+
+        .sub_cont {
+            float: left;
+            height: 620px;
+            text-align: center;
+            width: 80%;
+            padding-top: 200px;
+        }
+
+        .cont {
+            height: 620px;
+        }
+        .sub_nav .router-link-active { background-color:green; }
+        .sub_nav li { height: 35px;line-height: 35px; }
+    </style>
+</head>
+<body>
+<!--
+    1.根root
+    2.一级路由加 /  二级等具体 ==>>/A/moduleAOne
+ -->
+<div id="app">
+    <div class="container">
+        <ul class="main_nav">
+            <li>
+                <router-link to="/A" tag="div">模块A</router-link>
+            </li>
+            <li>
+                <router-link to="/B" tag="div">模块B</router-link>
+            </li>
+        </ul>
+        <div class="cont">
+            <router-view></router-view>
+        </div>
+    </div>
+</div>
+<!-- 模板区域  -->
+<template id="moduleATemplate">
+    <div>
+        <ul class="sub_nav">
+            <li><router-link to='/A/moduleAOne' tag="div">模块A-1</router-link></li>
+            <li><router-link to='/A/moduleATwo' tag="div">模块A-2</router-link></li>
+        </ul>
+        <div class="sub_cont">
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+
+<template id="moduleBTemplat">
+    <div>
+        <ul class="sub_nav">
+            <li>模块B-1</li>
+            <li>模块B-2</li>
+        </ul>
+        <div class="sub_cont">
+            <div>模块B-1内容</div>
+            <div>模块B-2内容</div>
+        </div>
+    </div>
+</template>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script src="router.js"></script>
+</body>
+</html>

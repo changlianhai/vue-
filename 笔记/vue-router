@@ -1,0 +1,17 @@
+
+路由:
+   vue-router
+
+   1) 引入vue-router
+   2) 配置 new VueRouter({
+        routes: [
+            {path: '', component: A},  // ==>>  默认进入
+            {path: '/home', component: A},
+            {path: '/home', component: B},
+            {path: '*', component: B},   // ==>>都匹配不到走到这里
+        ]
+   });
+   3) Vue跟实例使用router ==>> 这时候组件里面就可以使用$router $route 对象了
+   4) 页面使用<router-link to=''>模块一</router-link>
+   4) 页面使用<router-link to=''>模块二</router-link>
+             <router-view></router-view>

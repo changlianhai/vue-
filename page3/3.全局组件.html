@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <my-header></my-header>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('myHeader', {
+        template: `<div><span>{{msg}}</span></div>`,
+        data() {
+            return {
+                msg: 'hello world'
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+
+    });
+</script>
+</body>
+</html>

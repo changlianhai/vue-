@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+  父亲: {{msg}}
+    <button @click="getData">get-father-data</button>
+    <children @msg-aa="things" :msg1="msg" ref="div1"></children>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 100,
+        },
+        methods: {
+            things(val) {
+                alert(val);
+                this.msg = val;
+            },
+            getData() {
+                console.log(this.$refs.div1); //===>> VueComponent div1组件
+
+                this.$refs.div1.aa();
+            }
+        },
+        components: {
+            children: {
+                props: ['msg1'],
+                template: "<div><button @click='aa'>btn</button><div>儿子: {{msg1}}</div></div>",
+                methods: {
+                    aa() {
+                        this.$emit('msg-aa', 200)
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

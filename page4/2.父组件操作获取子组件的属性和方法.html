@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <div class="div1" ref="div1">div1</div>
+    <my-header ref="div2"></my-header>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let myHeader = {
+        template: '<div>{{a}}</div>',
+        data() {
+            return {
+                a: 1
+            }
+        },
+        methods:{
+            fn() {
+                console.log('fn');
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        created() {
+            console.log(this.$refs.div1); // ==>> undefined，DOM没有渲染完毕
+        },
+        mounted() {
+            console.log(this.$refs.div1); //=>> div1
+            console.log(this.$refs.div2); //=>> div2  << VueComponent >>也就是my-header组件的实例
+
+             // ==>> DOM渲染完毕，去获取子组件里面的方法和属性
+            this.$refs.div2.fn();
+            console.log(this.$refs.div2.a);
+
+            this.$refs.div2.a = '常连海'; // ==>> 父组件修改子组件的数据, 子组件在跟着刷新  双向数据绑定
+            // ==>> 子组件上传数据给父组件，父组件数据修改，子组件立即更新， 双向数据绑定
+        },
+        components: {
+            myHeader
+        }
+    })
+</script>
+</body>
+</html>

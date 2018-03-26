@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="x"> {{msg}}
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            x: '',
+        },
+        computed: {
+            msg() { // ===>>只有get默认简写法
+                if (this.x.length < 3) return '太短了';
+                if (this.x.length >6) return '太长了';
+                return 'OK';
+            }
+        }
+    });
+</script>
+</body>
+</html>

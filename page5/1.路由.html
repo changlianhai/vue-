@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <style>
+        .active { background-color: blue;color:#fff; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!-- vue-router提供全局组件router-view-->
+    <!--***router-link 里面的 to必须加上/，有二级路由不加会出现bug-->
+    <router-link to='/home' tag="button">首页</router-link>
+    <router-link to='/list' tag="button">列表页</router-link>
+    <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    'use strict';
+    let home1 = {template:'<div>首页</div>'};
+    let list1 = {template:"<div>列表页</div>"};
+
+    let routes = [
+        {
+            path: '/home',component: home1,
+        },{
+            path: '/list', component: list1,
+        }
+    ];
+    let router = new VueRouter({
+        routes: routes,
+        //***mode: 'history' // ==>> H5模式 history.pushState('','','home111111') 上线使用，开发不用，一刷新重新加载，找不到页面了
+        linkActiveClass:'active'  // ==>>修改默认激活时候样式类名
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        router
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/user/1">home1</router-link>
+    <router-link to="/user/2">home2</router-link>
+    <router-link to="/user/3">home3</router-link>
+
+    <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const User  = {
+        template: '<div>{{$route.params.id}}<button @click="fn">btn</button></div>',
+        methods: {
+            fn() {
+                console.log(this.$route);   // ==>>  一个对象{} 里面各种参数,要研究的
+                console.log(this.$router);  // ==>> VueRouter __proto__还有
+                console.log(this.$router.__proto__ === VueRouter );  // false ==>> VueRouter __proto__还有
+            }
+        }
+
+    };
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '',
+                component: User ,
+            },
+            {
+                path: '/user/:id',
+                component: User ,
+            },
+
+        ]
+    });
+    const vm = new Vue({
+        el: '#app',
+        router,
+    })
+</script>
+</body>
+</html>

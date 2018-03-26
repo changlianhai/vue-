@@ -1,0 +1,395 @@
+前端技术:
+
+    JS: ES5 + ES6, jQuery, Vue, Angular, React, Zepto, Wow.js Mui.js, Node
+    CSS: css3, animate.css, reset.css, bootStrap
+    HTML: html5
+    构建工具: gulp, grunt, webpack, fis
+
+
+    vue库,
+        UI库  iView(PC端) ==>> https://www.iviewui.com/
+        Mint UI(移动端) ==>> http://mint-ui.github.io/#!/zh-cn
+        Element UI(PC端): http://element.eleme.io/#/zh-CN/component/switch
+
+
+
+指令: dom元素的行间属性，VUE提供了内置的指令，必须以v-开头，后面的均为变量
+     - v-model(表单元素) 他忽略掉了value, selected, checked,属性，将数据绑定到视图上，视图修改会影响数据的变化
+
+  ***methods和data中的数据会全部放到vm上，而且名字不能冲突，冲突会报错
+     methods里面的this都指向实例  vm ===>> 根实例  =>>不能用箭头函数  =>>生命周期也不能用钩子函数
+
+
+   {{}} 里面的计算用  computed配置进行处理
+
+
+ - v-model (表单大哥， 管理checkbox和radio v-model='一类是一样的' value = 'val' 去获取值)
+   checkbox:   v-model指令 + value属性  + []
+   如果是复选框，只有一个复选框的时候，会把此值转为boolean类型，如果是true，选中，反之不选中
+   如果撒多个checkbox，要增加value属性并且数据类型是数组，
+
+
+
+
+  radio:   v-model指令其实就是 name属性  + value属性  + ''
+  如果是单选框，只有一个单选框的时候，会把此值转为boolean类型，如果是true，选中，反之不选中
+
+ - v-text {{}}
+ - v-cloak 解决闪烁问题  配合样式  [v-cloak] { display:none; }  --->>  后期都可以不采用，使用v-cloak需要加样式
+
+ - v-once 绑定一次，数据在变化不会导致视图的更新，写在不想刷新的标签上
+
+ - v-html 将html字符串转化为html
+
+ - v-for 循环(数组，对象，字符串，数字)
+        <li v-for = 'value in/of 数组'></li>
+        <li v-for = '(value, index) in/of 数组'></li>
+        <li v-for = '(value, key, index) in/of 数组对象'></li>
+
+ - v-on 事件 @
+    绑定给DOM元素，函数需要定义在methods中，不能和data里面的内容重复，this指向的是实例，不能使用箭头函数，
+    事件源对象如果不写括号，可以自动传入，否则能手动传入$event
+    <div @事件名='fn'></div>
+
+    如果不传参数，不要写括号，自动传入event对象，如果传参数，需要手动加 $event属性  fn($event, a)
+
+
+ - v-bind 行间属性/HTML内置属性和用户自定义属性   绑定动态属性值   :和v-bind等价
+
+
+   v-model.number='val' input类型是number 只能输入数字
+
+
+
+
+
+谷歌安装 Vue.js devtools没有出来, 解决办法 ==>> 使用开发版本的vue.js既可以，不用使用min版本的
+
+axios: 请求数据的库，基于promise，不依赖于任何框架，引入会暴露出一个 axios函数，给window增加了一个方法，axios直接使用，和jQuery一样
+
+
+
+**回调函数中的this为window
+**定时器和自执行函数里面的this为window      window.setTimeout/setInterval    node是Global
+
+
+数据监听两大对象:
+
+     对象:
+        1. data配置增加
+        2. vm.$set(对象，属性名， 属性值)， 在进行监听变量
+        3. 如果增加的多了怎么办了， 替换原对象方法
+
+     数组
+        1. data配置增加
+        2. 数组的变异方法:  pop , push , shift, unshift, sort, reverse, splice
+        3. 如果增加的多了怎么办了， 替换原对象方法
+
+
+
+
+Promise对象:
+
+    ==>> Ajax对象
+    ==>> fetch对象   http://blog.csdn.net/u012028371/article/details/67636295
+    ==>> generator, yeild函数 (ES6)
+    ==>> async,await函数 (ES7)  基于Promise和ES6  https://segmentfault.com/a/1190000007535316
+    回调函数原理: ===>>将后续的处理逻辑传入到当前要做的事，事情处理好后立马调用函数执行
+        function 买菜(callback) {
+            callback && callback(菜)
+        }
+        买菜(function(value){
+            console.log('我买来的菜===============>>' +  value);
+        })
+    1) 用同步的方法去写异步的代码
+        function 买菜(callback) {
+               return new Promise(resolve, reject) => {
+                    let val = '白菜';
+                    resolve(val);
+               });
+          }
+
+
+        买菜().then((value) => {
+            console.log('我买来的菜===============>>' +  value);
+        }, (err) => {
+            console.log('买菜失败===============>>' +  err);
+        });
+
+
+
+axios(对象请求数据): 返回一个promise类的一个实例，使用then和catch去捕获，成功返回一个对象，里面有data属性是获取到的值
+  学习文档: https://www.kancloud.cn/yunye/axios/234845
+        created() {
+            console.log(this instanceof Vue) ; // ==>> true
+            axios.get('../data/b.json').then(result => {
+                console.dir(result);
+                this.data = result.data;  // ==>> 这里的this要注意了，上面使用箭头函数，所以是created函数里面的this
+            });
+        }
+
+
+
+
+
+
+
+过滤器(filter/filters): 原始数据不变的情况，只是改变显示的效果 以 "|" 为分开  (管道符)
+   {{price * count | toFixed(3)}}
+           filters: {
+               toFixed(value, n) { // ==>>获取的值   这里的this是window对象     value是前面的值   value是获取到的值，n是函数的形参
+                   return value.toFixed(n);
+               }
+           }
+Vue.filter(filterName, val => {}); 全局指令
+放到页面开始部分
+
+
+ 数据都放到data里面
+ 方法和事件都放到methods里面
+ 指令都放到filters里面(私有属性)
+
+
+
+
+
+ v-model(如果是checkbox和select多选是数组，提供一个value值)(radio和checkbox分组靠的是v-model), checked,selected不存在
+ -修饰符 .number .lazy  v-model.number type='number'
+ -按键修饰符:  .enter .ctrl  .keyCode
+ -事件  @事件.stop
+        stopPropagation, cancelBubble = true
+        xx.addEventListener('click', fn, true/false)
+
+        @事件.prevent
+        preventDefault, returnValue = false;
+
+        @事件.once
+ - jQuery once 事件绑定一次
+
+        @事件.self
+  - e.srcElement && e.target 判断事件源绑定事件S
+
+
+
+
+ computed属性: 计算<<属性>>，不是方法
+  - 方法不会缓存，computed会根据依赖(归vue管的数据，可以响应式的变化)的属性进行缓存， 修改前后值进行对比 <<依赖的值不变，不会进行执行>>
+  - 两部分组成有get和set（不能只写set），可以只有get   一般情况下，通过JS赋值，影响其他值，或者表单元素设置值得时候，会调用set方法
+
+
+
+
+
+
+
+***watch属性: watch/methods/computed区别 ？
+ - computed属性不支持异步， watch支持异步属性, 有缓存
+ - watch属性支持异步
+ - methods有缓存
+
+
+
+
+
+
+v-if/v-show
+ v-if 操作的是DOM   v-if与v-else连用
+ v-show 操作的样式
+ template标记是vue提供给我们的，没有任何的实际意义，用来包裹元素用的, v-show不支持template
+
+   v-show对template无效
+   <template v-show="flag">
+         <div>div1</div>
+   </template>
+
+   v-if对template有效
+   <template v-if="flag">
+       <div>div1</div>
+   </templa
+
+
+
+
+
+class与style动态绑定:  动态绑定，后台给的某些值进行去动态绑定某个类
+  class静态的类和动态绑定的不冲突，如果一样了，后面的覆盖前面的
+
+  class='box1' 
+  数组绑定法: v-bind:class='[a, b, c]'  讲a,b,c变量的值绑定到class里面
+  对象绑定法: v-bind:class='{className1,flag, className2: flag}' flag如果为true，则className绑定
+
+  都可以采用computed进行计算出来再去绑定
+  style用法和class一样的
+
+
+
+
+
+vue生命周期:
+  ===>> 钩子函数里面的this指向当前的实例，所以不能使用箭头函数
+   --创建实例开始
+        new Vue();
+
+        初始化内部方法  eg: $children  $options  有el了
+
+        beforeCreate() {} 出生之前
+
+        注射data,methods，computed, watch实现数据双向数据绑定
+
+        created() ==>> 发送ajax, 异步，继续向下走
+
+        是否有el参数   <<el>>
+          有， 继续向下走， 没有 去找vm.$mount()挂在元素，没有则死掉了
+
+        是否有template参数   <<template>>
+          有，继续向下走， 没有则el的东西作为模板
+
+        beforeMount() 模板进行渲染之前
+
+        mounted() 模板渲染完毕 ==>> 真正的DOM渲染完毕
+
+        页面的双向数据绑定，改变的时候 (会做对比)
+
+        beforeUpdate()数据更新前  // ==>>一般用watch替换掉
+
+        update() 数据更新完毕
+
+        beforeDestroy() ==>>组件被销毁前
+
+        destroyed() ==>>组件被销毁完毕  异常监听者get,set，页面不会发生改变
+
+        vm.$mount();  挂载
+        vm.$destroy(); 销毁
+
+
+===>> vm实例上的方法
+  this.$data          vm上data数据
+  this.$watch()       监控的数据
+  this.$el            当前管理区域DOM
+  this.$options       vm上的所有属性
+  this.$nextTick()    当前队列底部， 异步操作
+  this.$set             设置后来的数据双向数据绑定   等待DOM渲染完毕获取vm
+  this.$refs            获取DOM元素  如果不是通过v-for循环出来的，ref是一样的，只能获取最后一个，v-for都可以获取到，返回是一个数组
+    注意： ***如果数据变化想获取真实的DOM中的内容，需要等待页面渲染完毕后再去获取，所有的DOM操作，最好nextTick()中
+
+
+
+
+组件:(Vue核心之一)
+  组件分类: 页面级组件 (一个页面是一个组件)， 将可复用的部分抽离出来， 基础组件
+  组件优点: 提高工作效率、方便重复复用、便于协同开发、容易维护和管理
+  一个自定义标签是一个组件
+
+
+  全局组件: Vue.component(componentName, options);   data必须是一个函数，各个组件数据相互不影响
+  局部组件: components: obj         三部曲: 1.创建组件 2.注册组件， 3.使用这个组件
+
+  ***组件是相互独立的，不能直接跨作用域， 实例也是一个组件， 组件中拥有生命周期函数
+     -- 组件理论上是可以无限嵌套
+     --子组件不能直接使用父组件上的数据（组件之间的数据交互）
+
+父子组件互相传值，跟组件/跟实例
+  ==>> 1.父组件给子组件传递数据:  props
+  ==>> 2.子组件给父组件传递数据:  $emit()  发布订阅模式  子组件绑定自定义事件，他的值是父组件的方法，通过子组件调用自定义事件，进行发布，通知父组件
+  ==>> 3.父组件操作子组件里面的属性和方法 在子组件上使用ref挂在，在父组件钩子函数mounted获取子组件实例
+
+  => 模板中只能有一个根组件
+
+  ref ==>> 1.获取普通DOM对象 (如果ref的值相同，不是v-for出来的DOM对象，获取的是最后一个，v-for获取所有的，返回一个数组)
+  ref ==>> 2.获取子组件的实例，父组件去操作
+
+
+ 组件插槽: slot
+        ==>> 1.事件和属性是父组件的
+        ==>> 2.标签有slot属性，对应组件里面slot里面的name，插入到指定的位置
+        <div id="app">
+            <my-header>
+                <p slot="cont" @click="fn1" ref="p1">{{cont}}</p>
+                <h1 slot="title">{{title}}</h1>
+                <div>{{other}}</div>
+            </my-header>
+        </div>
+        <template id="headerTemplate">
+            <div>
+
+                <slot name="title"></slot>
+                <slot name="cont"></slot>
+                <slot name="default"></slot>
+            </div>
+        </template>
+
+Vue内置组件:
+   ==>>1.component
+   ==>>2.transition
+   ==>>3.transition-group
+   ==>>4.keep-alive  一般用作缓存，为的是后面的路由准备，如果缓存了就不走钩子函数了  << 缓存组件 >>
+          <keep-alive>
+             <component :is='componentName'></component>
+          </keep-alive>
+   ==>>5.slot
+
+路由组件:
+   <router-link to/:to=attr></router-link>
+   <router-view></router-view>
+
+   想要在mounted()函数里面操作DOM，必须加一个nextTick  ，因为DOM渲染是异步执行的  ( mounted是同步的，但是里面操作DOM是异步的，所以你去获取数据，要nextTick下)
+
+   同辈组件进行传值/爷爷和儿子进行传值:  eventBus: new 一个实例， 去订阅和发布 /不过项目中不用， 用vuex管理状态
+
+==>> JS设计模式:
+      发布、订阅模式，
+      观察者模式
+
+
+
+
+npm init -y
+npm install vue vue-router axious bootstrap
+
+
+
+
+vue路由:
+    什么是单页面开发
+    什么是多页面开发
+
+   --引入vue-router.js文件
+   --new VueRouter()实例进行配置    配置routes参数  [{path: './home', component: home}]
+   --跟实例去配置这个实例
+   --页面使用<router-view></router-view> <router-link go/:go=attr></router-link>
+      go静态
+      go动态
+
+
+   页面跳转两种方式:
+     --1.hash加锚点，URL后面加     线下用
+     --2.history.pushState()用法，但是他不加锚点，一刷新就获取页面 ， 线上用
+
+   声明式路由
+   routes VueRouter实例配置
+   router Vue实例配置
+
+
+   编程式导航组件： 事件去触发
+    $router 一个对象，里面全是方法， push ,reaplace, ...
+    $route 一个对象,属性
+
+    routes VueRouter实例配置
+      routes: [],
+      mode: 'history/默认'
+      linkActiveClass:当前组件类
+    router Vue实例配置
+
+    ==>> 默认路由:
+     1) {path: '', component:homeComponent}, <<默认路由展示的路由>>，他是采用正则去匹配的，匹配到不进行向下找了，返回
+
+    类: 研究价值
+    VueComponent
+    VueRouter
+    Vue
+    new Vue实例
+
+
+
+
+

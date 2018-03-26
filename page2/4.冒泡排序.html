@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let ary = [1,4,2,1,0,3,4,0];
+       for (let i=0;i<ary.length-1;i++) {
+           for (let j=0;j<ary.length-i-1;j++) {
+             if (ary[j] > ary[j+1])  {
+                 var temp = ary[j];
+                 ary[j] = ary[j+1];
+                 ary[j+1] = temp;
+             }
+           }
+       }
+
+       console.log([...new Set([1,1,1,0,0,0,1])]);
+       console.log(ary);
+    </script>
+</body>
+</html>

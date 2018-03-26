@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/A">A</router-link>
+  <router-link to="/B">B</router-link>
+    <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let A = {
+        template: '<div>A</div>',
+    };
+
+    let B = {
+        template:'<div>B</div>'
+    };
+    let router = new VueRouter({
+        routes: [
+            {path: '*', component:A},
+            {path: '/A', component:A},
+            {path: '/B', component:B},
+            {path: '*', component:B}
+        ]
+    });
+    const vm = new Vue({
+        el: '#app',
+        router,
+    })
+</script>
+</body>
+</html>

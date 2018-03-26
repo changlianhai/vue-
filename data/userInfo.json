@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1001",
+    "title": "node书籍",
+    "price": 27.5,
+    "count": 2,
+    "isSelected": true,
+    "imgSrc": "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg"
+  },
+  {
+    "id": "1002",
+    "title": "css书籍",
+    "price": 37.9,
+    "count": 1,
+    "isSelected": false,
+    "imgSrc": "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg"
+  },
+  {
+    "id": "1003",
+    "title": "html书籍",
+    "price": 17,
+    "count": 10,
+    "isSelected": true,
+    "imgSrc": "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg"
+  },
+  {
+    "id": "1004",
+    "title": "angular书籍",
+    "price": 78,
+    "count": 3,
+    "isSelected": false,
+    "imgSrc": "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg"
+  },
+  {
+    "id": "1005",
+    "title": "webpack书籍",
+    "price": 27,
+    "count": 4,
+    "isSelected": true,
+    "imgSrc": "http://img10.360buyimg.com/cms/s80x80_jfs/t6841/107/347201634/418343/4a2773bc/597591b0N6cec829b.jpg"
+  }
+]

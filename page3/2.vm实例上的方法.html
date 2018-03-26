@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <div id="div1" ref="div1">{{msg}}</div>
+    <div id="div1" ref="div1">{{msg}}</div>
+    <div id="div1" ref="div1">{{msg}}</div>
+
+
+    <div class="box">
+        <p v-for=" item in ary" ref="p1">{{item}}</p>
+    </div>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {msg:'div1',ary:[1,2,3,4,5]},
+        mounted() {
+            this.$nextTick(()=>{   // ==>> 设置后来的数据双向数据绑定   等待DOM渲染完毕获取vm
+                console.log(vm === this); // true
+            });
+            this.$refs.div1.style.backgroundColor = 'red';
+            console.log(this.$refs.p1);  // ==>> [p, p, p, p, p]
+            this.ary = [1,2,3]; // ==>> DOM渲染是异步的，所以下面拿到的不是最新的三个p，是五个p，解决办法this.$nextTick()
+            console.log(this.$refs.p1);  // ==>> [p, p, p, p, p]
+
+
+            this.$nextTick(() => {
+                console.log(this.$refs.p1);  // ==>>  [p, p, p] 如果数据变化想获取真实的DOM中的内容，需要等待页面渲染完毕后再去获取，所有的DOM操作，最好nextTick()中
+            })
+        }
+    });
+</script>
+</body>
+</html>

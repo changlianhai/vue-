@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script src="./promise-ajax.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        created() {
+
+        }
+    });
+    ajax({url:'../data/b.json'}).then(data => {
+        console.log(data);
+    }).catch(err=> {
+        console.log(err);
+    });
+</script>
+</body>
+</html>

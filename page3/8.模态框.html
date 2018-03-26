@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <style>
+        .mask {
+            width: 400px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            background: gray;
+        }
+
+        .mask_title {
+            padding: 10px 10px;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .mask_title:hover {
+            color: #00f;
+        }
+
+        .mask_cont {
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <mask-pop :cont="info" @update-value="things" v-if='flag'></mask-pop>
+    <button @click="showPop">显示模态框</button>
+    <button @click="showPop">显示模态框</button>
+    <button @click="showPop">显示模态框</button>
+    <button @click="showPop">显示模态框</button>
+</div>
+<template id="maskTemplate">
+    <div class="mask">
+        <div class="mask_title" @click="settings_pop">关闭</div>
+        <div class="mask_cont">
+            {{cont}}
+        </div>
+    </div>
+</template>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    'use strict';
+    let maskPop = {
+        props: ['cont'],
+        template: '#maskTemplate',
+        methods: {
+            settings_pop() {
+
+                this.$emit('update-value', false);
+            }
+        },
+
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            info: '这是一个模态框',
+            flag: false,
+        },
+        components: {
+            maskPop
+        },
+        methods: {
+            things(val) {
+                this.flag = val;
+            },
+            showPop() {
+                this.flag = true;
+            }
+        }
+    });
+</script>
+</body>
+</html>

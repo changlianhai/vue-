@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <router-link to='./home' tag="button">home</router-link>
+    <router-link to='./list' tag="button">list</router-link>
+    <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let router = new VueRouter({
+        routes: [ // routes 定义路由配置
+           {path: '/home',component: {template: '<div>home</div>'}},
+           {path: '/list',component: {template: '<div>list</div>'}},
+       ]
+    });
+    let vm = new Vue({
+        el: '#app',
+        router // ==>>注入路由
+    })
+</script>
+</body>
+</html>

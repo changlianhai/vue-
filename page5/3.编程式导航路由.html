@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">士大夫士大夫士大夫
+    <router-link :to="{path:'/home'}">首页</router-link>
+    <router-link :to="{path:'/list'}">列表页</router-link>
+   <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let homeComponent = {
+        template: '<div>{{title}}<button @click="goList">去列表页面</button></div>',
+        data() {
+            return {title:'首页'}
+        },
+        methods: {
+            goList() {
+                // ==>> this是VueComponent  this.$router 是VueRouter有研究的价值这里
+                this.$router.push('/list'); // ==>> /是表示要去哪里  push是在[]数组里面在加入地址，replace是用指定的地址去替换当前的地址
+            }
+        }
+    };
+    let listComponent = {
+       template: `<div>{{title}}<button @click="goPrev">返回上一级</button></div>`,
+        data() {
+           return {title:'列表页面'}
+        },
+        methods: {
+           goPrev() {
+                this.$router.go(-1);
+           }
+        }
+    };
+    let router = new  VueRouter({
+       routes: [
+           {path: '', component:homeComponent}, // ==>>默认展示的路由
+           {path: '/home', component:homeComponent},
+           {path: '/list', component:listComponent},
+           {path: '*',redirect:'/home'}, // ==>>当网址不存在，需要进行重定向，==>>路径改变，组件也要切换， 使用场景404 的时候用
+       ]
+    });
+    const vm = new Vue({
+        el: '#app',
+        router, // ==>>每一个<< 组件 >>都会有一个$router的属性，里面是方法， 有一个是$route里面存的是属性
+    });
+</script>
+</body>
+</html>

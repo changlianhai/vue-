@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <style>
+        div {  width: 100px;height:100px;background-color: blueviolet;cursor: pointer; }
+    </style>
+</head>
+<body>
+<div id="app">
+     <div onclick="fn()" id="div1">
+         div
+     </div>
+
+    <br />
+    <div v-on:click="a($event, 100)">
+
+    </div>
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    // ==>> 事件的绑定
+     // 1.行内  所有绑定的方法都是window对象上的，全局
+    //  2. onclick属性
+    //  3. addEventListener
+
+    console.log(div1.onclick);
+    /*ƒ onclick(event) {    // == event 事件源
+        fn()
+    }*/
+    function fn() {
+        alert(10);
+    }
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        methods: {
+            a(event, val) {
+                console.log(event);
+                console.log(val);
+            }
+        }
+    })
+</script>
+</body>
+</html>

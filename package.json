@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/changlianhai/vue-#readme",
   "dependencies": {
-    "vue": "^2.5.13"
+    "axios": "^0.18.0",
+    "bootstrap": "^4.0.0",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

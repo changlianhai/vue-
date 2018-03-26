@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <di>{{msg}}</di>
+    <my-header :info="msg" v-on:msg-things="things"></my-header>
+</div>
+<template id="headerTemplate">
+    <div>
+        <div>{{info}}</div>
+        <button v-on:click="getValue">修改父组件的值</button>
+    </div>
+</template>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+    let myHeader = {
+        props: ['info'],
+        template: '#headerTemplate',
+        methods: {
+            getValue() {
+                this.$emit('msg-things', 100);
+            }
+        }
+
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 10,
+        },
+        methods: {
+            things(val) {
+               alert(val);
+               this.msg = val;
+            }
+        },
+        components: {
+            myHeader
+        }
+    });
+</script>
+</body>
+</html>

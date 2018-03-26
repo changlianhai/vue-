@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <!-- 父亲绑定一些事件，儿子触发这个事件，将参数传递过去，单向数据流，父亲数据刷新，儿子就刷新 -->
+    <!-- children.on('children-msg, things) -->
+  父亲: {{money}}<br />
+   儿子: <children v-bind:money="money" v-on:children-msg="things"></children>
+</div>
+<script src="./../node_modules/vue/dist/vue.min.js"></script>
+<script>
+    'use strict';
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            money: 100,
+        },
+        methods: {
+          things(val) {
+              this.money = val;
+          }
+        },
+        components: {
+            children: {
+                props: ['money'],
+                template: `<span>{{money}}<button @click="getMoney()">修改父亲的钱数</button></span>`,
+                methods: {
+                    getMoney() {
+                        this.$emit('children-msg', 800);  // ==>>触发自己的自定义事件， 让父亲的方法去执行
+                    }
+                }
+            }
+        }
+    });
+
+    String.prototype.myTrim = function () {
+        return this.replace(/[ ]/g,""); //去除字符算中的空格
+    };
+
+</script>
+</body>
+</html>
