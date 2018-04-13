@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    A:<input type="checkbox" v-model="msg" value="A">
+    B:<input type="checkbox" v-model="msg" value="B">
+    C:<input type="checkbox" v-model="msg" value="C">
+    {{msg}}
+
+    <br/>
+    X1:<input type="radio" value="x1" id="" v-model="msg1">
+    X2:<input type="radio" value="x2" id="" v-model="msg1">
+    X3:<input type="radio" value="x3" id="" v-model="msg1">
+    {{msg1}}
+
+    <br/>
+    <input type="text" v-model="cont">
+    {{cont}}
+    <br/>
+
+    <select name="" id="" v-model="value">
+        <option value="篮球">篮球</option>
+        <option value="羽毛球">羽毛球</option>
+        <option value="排球">排球</option>
+    </select>
+
+    <div class="a" v-bind:class="[b]">div1</div>
+    <div class="a" v-bind:class="{icon1: flag}">div1</div>
+    <div @click.once="a" style="width: 400px;height: 200px;background: red;">{{obj.xx}}</div>
+    <div>{{name}}</div>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script src=""></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: [],
+            msg1: '',
+            cont: '',
+            value: '篮球',
+            b: 'container',
+            flag: true,
+            obj: {
+
+            }
+        },
+        methods: {
+          a() {
+              alert('pl')
+          }
+        },
+        computed: {
+            name() {
+                setTimeout(()=>{
+                    return 1;
+                },1000)
+            }
+        }
+    });
+    vm.$set(vm.obj, 'xx', 'clh')
+</script>
+</body>
+</html>

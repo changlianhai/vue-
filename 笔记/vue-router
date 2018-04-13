@@ -15,3 +15,17 @@
    4) 页面使用<router-link to=''>模块一</router-link>
    4) 页面使用<router-link to=''>模块二</router-link>
              <router-view></router-view>
+
+
+
+
+   基本路由
+
+   嵌套路由
+
+
+   重定向路由  {path: '/A', redirect: '/B'}  重定向到B
+
+
+   路由参数变化
+

@@ -1,0 +1,7 @@
+component: 组件 IS配置去使用，选择你要渲染的私有组件是哪一个,    <component is="list"></component>
+
+keep-alive: 如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染 ， 缓存组件
+
+transition: 动画过度，配合animate.css使用
+
+slot: 插槽

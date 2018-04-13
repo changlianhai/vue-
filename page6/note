@@ -1,0 +1,13 @@
+1.模块
+ - node 模块的规范commonJS  ==>>NODE 后端使用  require导入模块
+ - CMD sea.js  AMD require  ==>>浏览器端使用
+ - ES6 Module ==>> 前端使用
+   - 定义模块 (一个JS就是一个模块)
+   - 到处模块 export
+   - 引入模块 import
+ - UMD 做兼容处理， AMD,CMD, commonJS可以互相转换
+
+ ES6模块讲解:(http://es6.ruanyifeng.com/#docs/module)
+   -- 如果是第三方模块不需要加./, 如果是文件模块需要加./
+   -- import导入，其实就是解构赋值， export导出是导出一个对象
+   -- export default

@@ -8,7 +8,7 @@ let p = new Promise((resolve, reject) => {
     for (let i=0;i<1000;i++) {
         i === 999 && resolve();
     }
-    console.log(3);
+console.log(3);
 }).then(res => {
     console.log(4);
 });

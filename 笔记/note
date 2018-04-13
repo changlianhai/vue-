@@ -185,7 +185,7 @@ Vue.filter(filterName, val => {}); 全局指令
 ***watch属性: watch/methods/computed区别 ？
  - computed属性不支持异步， watch支持异步属性, 有缓存
  - watch属性支持异步
- - methods有缓存
+ - methods没有缓存
 
 
 
@@ -270,6 +270,7 @@ vue生命周期:
   this.$nextTick()    当前队列底部， 异步操作
   this.$set             设置后来的数据双向数据绑定   等待DOM渲染完毕获取vm
   this.$refs            获取DOM元素  如果不是通过v-for循环出来的，ref是一样的，只能获取最后一个，v-for都可以获取到，返回是一个数组
+  this.$delete
     注意： ***如果数据变化想获取真实的DOM中的内容，需要等待页面渲染完毕后再去获取，所有的DOM操作，最好nextTick()中
 
 
@@ -292,8 +293,12 @@ vue生命周期:
   ==>> 1.父组件给子组件传递数据:  props
   ==>> 2.子组件给父组件传递数据:  $emit()  发布订阅模式  子组件绑定自定义事件，他的值是父组件的方法，通过子组件调用自定义事件，进行发布，通知父组件
   ==>> 3.父组件操作子组件里面的属性和方法 在子组件上使用ref挂在，在父组件钩子函数mounted获取子组件实例
-
+  ==>> 4.子组件调用父组件的方法和数据 vm.$parent.xxx
   => 模板中只能有一个根组件
+
+  父子组件传递，父向子传递采用props，子向父采用事件emit
+  父组件调用子组件的数据和方法 ref==>>this.$refs.xxxll, 子组件调用父组件里面数据和方法vm.$parent.xxxx
+
 
   ref ==>> 1.获取普通DOM对象 (如果ref的值相同，不是v-for出来的DOM对象，获取的是最后一个，v-for获取所有的，返回一个数组)
   ref ==>> 2.获取子组件的实例，父组件去操作
@@ -344,7 +349,7 @@ Vue内置组件:
 
 
 npm init -y
-npm install vue vue-router axious bootstrap
+npm install vue vue-router axios bootstrap
 
 
 
@@ -388,6 +393,16 @@ vue路由:
     VueRouter
     Vue
     new Vue实例
+
+
+ 安装步骤:
+    npm install vue-cli -g 全局安装
+    vue install webpack vue-dome
+    cd vue-dome
+    npm run dev
+    npm install less less-loader axios vuex
+
+
 
 
 

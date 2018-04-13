@@ -70,8 +70,15 @@
         .cont {
             height: 620px;
         }
-        .sub_nav .router-link-active { background-color:green; }
-        .sub_nav li { height: 35px;line-height: 35px; }
+
+        .sub_nav .router-link-active {
+            background-color: green;
+        }
+
+        .sub_nav li {
+            height: 35px;
+            line-height: 35px;
+        }
     </style>
 </head>
 <body>
@@ -98,8 +105,12 @@
 <template id="moduleATemplate">
     <div>
         <ul class="sub_nav">
-            <li><router-link to='/A/moduleAOne' tag="div">模块A-1</router-link></li>
-            <li><router-link to='/A/moduleATwo' tag="div">模块A-2</router-link></li>
+            <li>
+                <router-link to='/A/moduleAOne' tag="div">模块A-1</router-link>
+            </li>
+            <li>
+                <router-link to='/A/moduleATwo' tag="div">模块A-2</router-link>
+            </li>
         </ul>
         <div class="sub_cont">
             <router-view></router-view>

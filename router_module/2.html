@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表页</router-link>
+
+    <router-view></router-view>
+
+
+    <router-link to="/home/book">首页-book</router-link>
+    <router-link to="/list/food">列表页-food</router-link>
+    <router-view></router-view>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script src="router.js"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        router
+    })
+</script>
+</body>
+</html>

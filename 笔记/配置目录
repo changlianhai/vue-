@@ -1,0 +1,2 @@
+.vue分析
+  三部分:  template结构(里面必须有一个<<根元素>>),  样式style, 行为script (默认必须导出一个对象 export defulat {})

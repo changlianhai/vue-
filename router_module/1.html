@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/home/123">home</router-link>
+    <router-link :to="{name:'list',params:{id:111}}">list</router-link>
+    <router-view></router-view>
+    <button @click="aa">aaaaaaaaaaaaaaaaaaaaaa</button>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let homeComponent = {
+        template: '<div>home</div>',
+
+
+    };
+    let listCOmponent = {
+        template: '<div>list</div>'
+    };
+    const router = new VueRouter({
+       routes: [
+           {
+               path: '/home/:id',
+               component: homeComponent,
+
+
+           },
+           {
+               path: '/list/:id',
+               component: listCOmponent,
+               name: 'list'
+
+
+           }
+       ]
+    });
+    const vm = new Vue({
+        el: '#app',
+        router,
+        methods: {
+            aa() {
+                console.log(this.$route.params);
+            }
+        }
+    });
+    console.log(vm.$route);
+    console.log(vm.$router);
+</script>
+</body>
+</html>

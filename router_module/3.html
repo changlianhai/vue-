@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <link rel="stylesheet" href="3.css" charset="utf-8" />
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="top js_top">
+            <h1 class="top_title">权限中心</h1>
+        </div>
+        <div class="nav">
+            <ul class="js_nav " @click="oneRouter">
+                <router-link to="/onePermissionsApply" tag="li">申请权限</router-link>
+                <router-link :to="{path:'/oneMyPermissions/123',query:{a:1,b:2,c:3}}" tag="li">我的权限</router-link>
+                <router-link to="/oneMyApproval" tag="li">我的审批</router-link>
+                <router-link to="onePermissionsManagement" tag="li">权限管理</router-link>
+            </ul>
+            <div class="cont_area">
+                <router-view></router-view>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<template id="permissionsManagementTemplate">
+   <div class="permissions_management">
+       <ul>
+           <router-link to="twoPermissionsManagement1" tag="li">角色管理</router-link>
+           <router-link to="twoPermissionsManagement2" tag="li">成员管理</router-link>
+       </ul>
+       <div class="container_router">
+           <router-view></router-view>
+       </div>
+   </div>
+</template>
+
+<template id="twoPermissionsManagement1Template">
+    <div  class="twoPermissionsManagement1">
+        <div class="twoPermissionsManagement1_div">
+            <span>角色</span>
+            <input type="text" v-model="userName">
+        </div>
+        <div class="twoPermissionsManagement1_div">
+            <span>成员</span>
+            <input type="text" v-model="userManage">
+        </div>
+        <button class="two_add_btn" @click="itemAdd">添加</button>
+
+        <div class="twoPermissionsManagement1_cont">
+            <table>
+                <thead>
+                    <tr>
+                        <td>序号</td>
+                        <td>角色ID</td>
+                        <td>角色</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) of dataList" :key="index" @dblclick="datel(index)">
+                        <td>{{index}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.title}}</td>
+                        <td> <button class="" @click.stop="removeItem(index)">删除</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+        <div style="float:right;margin:10px 50px">总计:{{count}}条</div>
+    </div>
+</template>
+
+
+<template id="twoPermissionsManagement2Template">
+    <div>
+        <div class="twoPermissionsManagement2_div">
+            <router-link to="twoPermissionsManagementDaMi" tag="span">大米</router-link>
+            <router-link to="twoPermissionsManagementXiaoMai" tag="span">小麦</router-link>
+        </div>
+        <div style="padding-top: 300px;">
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script src="axios.min.js"></script>
+<script src="3.js"></script>
+<script src="3_router.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        router,
+        methods: {
+            oneRouter() {
+                console.log(this);
+            }
+        }
+    })
+</script>
+</body>
+</html>

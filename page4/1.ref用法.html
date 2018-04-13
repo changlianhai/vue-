@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>vue</title>
+    <style>
+        .div1 {
+            height: 100px;
+            background: red;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-  <div div></div>
+    <div @click="getMonth">father</div>
+    <transition  name="fade">
+        <my-header ref="div1"></my-header>
+    </transition>
 </div>
 <script src="./../node_modules/vue/dist/vue.min.js"></script>
 <script>
     'use strict';
+    const myHeader = {
+        template: '<div @click="getFatherData" class="div1">div1</div>',
+        data: {
+          a: 1,
+          b: 2
+        },
+        methods: {
+            getFatherData() {
+                console.log(this.$parent.c());
+            }
+        }
+    };
     let vm = new Vue({
         el: '#app',
-    })
+        data: {
+            a: 1,
+            b: 2,
+        },
+        methods: {
+            c() {
+                alert('c');
+            },
+            getMonth() {
+                console.log(this.$children);
+            }
+        },
+        components: {
+            myHeader
+        }
+    });
 </script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+  <my-header :x="x" :y="y"></my-header>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script src="./../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const myHeader = {
+        props: ['x', 'y'],
+        template: '<div @click="a">div1</div>',
+        methods: {
+            a() {
+                console.log(this.$props);
+                console.log(this.$parent.x1());
+            }
+        }
+    };
+    const vm = new Vue({
+        el: '#app',
+        data:{
+            x: 1,
+            y: 2,
+        },
+        methods: {
+            x1() {
+                alert('x1');
+            }
+        },
+        components: {
+            myHeader
+        }
+    })
+</script>
+</body>
+</html>

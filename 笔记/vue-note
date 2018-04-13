@@ -1,0 +1,71 @@
+指令区域:  Vue.filter()  / filters
+   v-html, v-text, {{}}  模板绑定
+   v-bind  动态属性处理  class属性处理  :class='icon1: flag1,icon2: flag2'  :class='[a,b,c]'   style也是一样的
+   v-for  (value, key, index)    (item, index) of ary
+   v-on  @click  stop, prevent, once,self
+   v-model 表单 双向数据绑定， value属性的作用
+   v-once 渲染一次
+   v-if, v-show(template标签问题) 显示问题
+   v-cloak ==>> {{}} 闪烁问题 [v-clock] {display:none;}
+
+
+new Vue(options) 配置参数
+ el
+ data
+ methods
+ computed
+ watch
+ template
+ filters
+ directives
+ components
+ ==>>render 渲染函数
+
+ ?computed, watch, methods区别
+
+
+
+vm上的配置参数
+ vm.$el
+ vm.$data
+ vm.$watch
+ vm.$options
+ ==>>vm.$set
+ vm.$delete
+ vm.$refs
+ vm.$nextTick()
+ ==>>vm.$props
+ ==>>vm.$parents
+ ==>>vm.$children
+ ==>>vm.$slots
+ vm.$mount()
+ vm.$destroy
+ vm.$on
+ vm.$off
+ vm.$once
+ ==>>vm.$emit(eventName, param)
+
+
+
+Vue静态方法
+ Vue.use()
+ Vue.set()
+ Vue.delete()
+ Vue.filter()
+ Vue.directive()
+ Vue.component()
+ Vue.nextTick()
+
+父子组件传递问题：
+  ==>>传值:
+          父组件给子组件下发数据  props属性  this.$props
+          子组件给父组件上传数据  $emit事件，发布订阅模式
+  ==>>操作:
+          父组件获取子组件的数据和方法  this.$refs
+          子组件获取父组件的数据和方法  this.$parents
+
+  ==>>同辈组件传值
+        vuex
+
+
+

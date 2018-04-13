@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+</head>
+<body>
+<div id="app">
+  <component is="list"></component>
+</div>
+<script src="./../node_modules/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components: {
+            home: {
+                template: '<div>home</div>'
+            },
+            list: {
+                template: '<div>list</div>'
+            }
+        }
+    })
+</script>
+</body>
+</html>
